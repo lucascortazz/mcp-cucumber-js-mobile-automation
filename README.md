@@ -79,6 +79,31 @@ Execute multilingual device parsing demonstration.
 ### Prerequisites
 - Node.js 16 or higher
 - TypeScript
+- The parent Cucumber.js project: https://github.com/lucascortazz/cucumber-js-mobile-automation
+
+### Environment Variables
+
+You can configure the MCP server using environment variables:
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `CUCUMBER_PROJECT_PATH` | Path to the parent cucumber-js-mobile-automation project | `../cucumber-js-mobile-automation` |
+
+**Example:**
+```bash
+# Set custom path to parent project
+export CUCUMBER_PROJECT_PATH="/path/to/cucumber-js-mobile-automation"
+npm start
+```
+
+### Project Path Configuration
+
+The MCP server automatically looks for the parent project in these locations:
+1. **Environment variable**: `CUCUMBER_PROJECT_PATH`
+2. **Default relative path**: `../cucumber-js-mobile-automation`
+
+If the parent project is not found, the server will display helpful error messages with setup instructions.
+- TypeScript
 - Access to the parent Cucumber.js mobile automation project at:
   `/Users/lucascortazzo/code/cucumber-js-mobile-automation`
 
@@ -124,16 +149,129 @@ Once connected to an MCP client (like Claude Desktop), you can use these command
 - "Show project status"
 - "Run multilingual demo in Portuguese"
 
-## 🔗 Integration
+## 🔗 Integration & Setup
 
-This MCP server integrates with the existing Cucumber.js mobile automation framework located at:
-`/Users/lucascortazzo/code/cucumber-js-mobile-automation`
+This MCP server integrates with the Cucumber.js mobile automation framework available at:
+**https://github.com/lucascortazz/cucumber-js-mobile-automation**
 
-The server provides a bridge between MCP clients and the mobile automation testing capabilities, allowing AI assistants to:
-- Execute mobile tests
-- Manage test scenarios
-- Handle device configurations
-- Process test results
+### 📋 Complete Setup Guide
+
+Follow these steps to set up both the parent project and this MCP server:
+
+#### Step 1: Set Up the Parent Mobile Automation Project
+
+1. **Clone the parent project**:
+   ```bash
+   git clone https://github.com/lucascortazz/cucumber-js-mobile-automation.git
+   cd cucumber-js-mobile-automation
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**:
+   ```bash
+   # Copy the example environment file
+   cp .env.example .env
+   
+   # Edit .env with your BrowserStack credentials
+   # BROWSERSTACK_USERNAME=your_username
+   # BROWSERSTACK_ACCESS_KEY=your_access_key
+   ```
+
+4. **Test the setup**:
+   ```bash
+   npm test
+   ```
+
+#### Step 2: Set Up the MCP Server
+
+1. **Clone this MCP server project**:
+   ```bash
+   git clone https://github.com/lucascortazz/mcp-cucumber-js-mobile-automation.git
+   cd mcp-cucumber-js-mobile-automation
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Update the parent project path**:
+   
+   Edit `src/index.ts` and update the `CUCUMBER_PROJECT_PATH` constant:
+   ```typescript
+   // Update this path to match your parent project location
+   const CUCUMBER_PROJECT_PATH = "/your/path/to/cucumber-js-mobile-automation";
+   ```
+
+4. **Build the MCP server**:
+   ```bash
+   npm run build
+   ```
+
+#### Step 3: Configure Claude Desktop
+
+1. **Install Claude Desktop** from https://claude.ai/download
+
+2. **Configure MCP integration**:
+   
+   **macOS**: Edit `~/Library/Application Support/Claude/claude_desktop_config.json`
+   **Windows**: Edit `%APPDATA%\Claude\claude_desktop_config.json`
+   
+   ```json
+   {
+     "mcpServers": {
+       "mobile-automation": {
+         "command": "node",
+         "args": ["/absolute/path/to/mcp-cucumber-js-mobile-automation/build/index.js"]
+       }
+     }
+   }
+   ```
+
+3. **Restart Claude Desktop** completely
+
+#### Step 4: Test the Integration
+
+1. **Start Claude Desktop** and look for the MCP tools indicator
+2. **Try these commands**:
+   - "Show me available test scenarios"
+   - "Run calculator tests on iPhone 12"
+   - "Get device information"
+   - "What's the current project status?"
+
+### 🔧 Project Structure Requirements
+
+Your directory structure should look like this:
+```
+your-projects/
+├── cucumber-js-mobile-automation/          # Parent project
+│   ├── features/
+│   │   ├── calculator.feature
+│   │   └── openReminders.feature
+│   ├── app/
+│   │   └── Calculator.apk
+│   ├── utils/
+│   └── package.json
+└── mcp-cucumber-js-mobile-automation/      # This MCP server
+    ├── src/
+    │   └── index.ts
+    ├── build/
+    └── package.json
+```
+
+### 🚀 Bridge Capabilities
+
+The MCP server provides a bridge between MCP clients and the mobile automation testing capabilities, allowing AI assistants to:
+- **Execute mobile tests** from the parent project
+- **Manage test scenarios** dynamically
+- **Handle device configurations** 
+- **Process test results** and provide insights
+- **Upload APK files** to BrowserStack
+- **Run multilingual demos** and parsing tests
 
 ## 📝 Development
 

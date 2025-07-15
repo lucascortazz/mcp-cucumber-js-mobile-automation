@@ -8,7 +8,21 @@ import { readFileSync, existsSync } from "fs";
 import * as path from "path";
 
 // Configuration
-const CUCUMBER_PROJECT_PATH = "/Users/lucascortazzo/code/cucumber-js-mobile-automation";
+// Update this path to match your parent cucumber-js-mobile-automation project location
+// You can also set the CUCUMBER_PROJECT_PATH environment variable
+const CUCUMBER_PROJECT_PATH = process.env.CUCUMBER_PROJECT_PATH || 
+  path.join(process.cwd(), "../cucumber-js-mobile-automation");
+
+// Validate that the parent project exists
+if (!existsSync(CUCUMBER_PROJECT_PATH)) {
+  console.error(`❌ Parent project not found at: ${CUCUMBER_PROJECT_PATH}`);
+  console.error(`📋 Please ensure the cucumber-js-mobile-automation project is cloned and accessible.`);
+  console.error(`🔗 Get it from: https://github.com/lucascortazz/cucumber-js-mobile-automation`);
+  console.error(`💡 Or set CUCUMBER_PROJECT_PATH environment variable to the correct path.`);
+  process.exit(1);
+}
+
+console.error(`✅ Parent project found at: ${CUCUMBER_PROJECT_PATH}`);
 
 // Create server instance
 const server = new McpServer({

@@ -11,6 +11,7 @@
     "build": "tsc && chmod +x build/index.js",
     "start": "node build/index.js",
     "dev": "npm run build && npm run start",
+    "setup": "node -e \"console.log('\\n🔧 MCP Mobile Automation Setup\\n'); console.log('📋 Please ensure the parent project is available at:'); console.log('🔗 https://github.com/lucascortazz/cucumber-js-mobile-automation\\n'); console.log('💡 Set CUCUMBER_PROJECT_PATH environment variable if needed.\\n');\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

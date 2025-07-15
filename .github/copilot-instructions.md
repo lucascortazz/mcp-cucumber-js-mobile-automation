@@ -10,7 +10,7 @@ This is a Model Context Protocol (MCP) server project that provides mobile autom
 
 - **Framework**: TypeScript-based MCP server using @modelcontextprotocol/sdk
 - **Purpose**: Expose mobile testing capabilities (calculator tests, device management, test execution)
-- **Integration**: Connects to existing Cucumber.js mobile automation framework
+- **Integration**: Connects to Cucumber.js mobile automation framework from https://github.com/lucascortazz/cucumber-js-mobile-automation
 - **Target**: Provide mobile automation tools to AI assistants via MCP
 
 ### Development Guidelines
@@ -19,11 +19,13 @@ This is a Model Context Protocol (MCP) server project that provides mobile autom
 2. **Type Safety**: Use TypeScript and Zod for proper schema validation
 3. **Integration**: Leverage existing Cucumber.js framework from the parent project
 4. **Documentation**: Maintain clear tool descriptions and parameter schemas
+5. **Path Configuration**: Use configurable paths for the parent project location
 
 ### Resources
 
 - MCP Documentation: https://modelcontextprotocol.io/llms-full.txt
 - SDK Reference: https://github.com/modelcontextprotocol/create-python-server
+- Parent Project: https://github.com/lucascortazz/cucumber-js-mobile-automation
 - You can find more info and examples at https://modelcontextprotocol.io/llms-full.txt
 
 ### Tools to Implement
