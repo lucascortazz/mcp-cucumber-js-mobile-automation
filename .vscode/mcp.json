@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "mobile-automation": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["/Users/lucascortazzo/code/mcp-cucumber-js-mobile-automation/build/index.js"]
+    }
+  }
+}
