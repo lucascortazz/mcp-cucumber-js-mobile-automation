@@ -127,7 +127,14 @@ server.tool(
   async () => {
     try {
       const calculatorFeature = readProjectFile('features/calculator.feature');
-      const reminderFeature = readProjectFile('features/openReminders.feature');
+      
+      // Check if other feature files exist
+      let demoAppFeature = '';
+      try {
+        demoAppFeature = readProjectFile('features/demoApp.feature');
+      } catch (error) {
+        // demoApp.feature doesn't exist, skip it
+      }
       
       // Extract scenarios from feature files
       const extractScenarios = (content: string) => {
@@ -142,13 +149,13 @@ server.tool(
       };
 
       const calculatorScenarios = extractScenarios(calculatorFeature);
-      const reminderScenarios = extractScenarios(reminderFeature);
+      const demoAppScenarios = demoAppFeature ? extractScenarios(demoAppFeature) : [];
 
       return {
         content: [
           {
             type: "text",
-            text: `Available Test Scenarios:\n\n📱 Calculator App:\n${calculatorScenarios.map(s => `  • ${s}`).join('\n')}\n\n📋 Reminder App:\n${reminderScenarios.map(s => `  • ${s}`).join('\n')}`,
+            text: `Available Test Scenarios:\n\n📱 Calculator App:\n${calculatorScenarios.map(s => `  • ${s}`).join('\n')}${demoAppScenarios.length > 0 ? `\n\n� Demo App:\n${demoAppScenarios.map(s => `  • ${s}`).join('\n')}` : ''}`,
           },
         ],
       };
