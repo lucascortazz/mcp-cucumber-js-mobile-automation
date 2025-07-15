@@ -43,3 +43,8 @@ coverage/
 # Temporary folders
 tmp/
 temp/
+
+# Test files and documentation
+SETUP_COMPLETE.md
+GITHUB_READY.md
+src/test.ts
