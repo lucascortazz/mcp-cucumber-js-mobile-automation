@@ -48,3 +48,14 @@ temp/
 SETUP_COMPLETE.md
 GITHUB_READY.md
 src/test.ts
+test.ts
+*.test.ts
+*.spec.ts
+
+# TypeScript compilation
+lib/
+out/
+
+# Development files
+.eslintcache
+.tscache
